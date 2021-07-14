@@ -5,7 +5,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import ItemList from "../src/components/ItemList";
 
-export type ListData = {
+export type ListData =  {
     api_featured_image: string;
     brand: string;
     category: null | string
@@ -29,13 +29,15 @@ export type ListData = {
 
 export default function Home() {
     const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
-    const [data, setData] = useState<ListData[]>([]);
+    const [data, setData] = useState<ListData[] | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const getData = async () => {
         await axios.get(API_URL)
             .then((response)=> {
                 console.log(response.data);
                 setData(response.data);
+                setIsLoading(false);
             })
     }
 
@@ -44,11 +46,19 @@ export default function Home() {
     },[])
 
     return (
-        <div>
+        <div style={{marginTop : 14}}>
             <Head>
                 <title>HOME | JJo</title>
             </Head>
-            <ItemList list={data}/>
+            { isLoading &&
+                <div className="ui segment" style={{display : "inline-block", height : "300px", width : "100%"}}>
+                    <div className="ui active inverted dimmer">
+                        <div className="ui text loader">Loading</div>
+                    </div>
+                    <p></p>
+                </div>
+            }
+            { data && <ItemList list={data}/> }
         </div>
     )
 }

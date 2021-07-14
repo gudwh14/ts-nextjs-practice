@@ -13,7 +13,7 @@ const ItemData = ({item} : ItemProps) => {
                 <h1>{item?.name}</h1>
                 <strong>${item?.price}</strong>
             </div>
-            <Button color={"blue"}>구매하기</Button>
+            <button className="ui primary button">구매하기</button>
             <Divider/>
             <p>{item?.description}</p>
         </>
