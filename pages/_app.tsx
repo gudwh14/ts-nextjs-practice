@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import Header from "../src/components/Header";
+import Footer from "../src/components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /**
@@ -7,7 +9,13 @@ function MyApp({ Component, pageProps }: AppProps) {
    * pageProps 는 DataFetching 메소드를 통해 미리 가져온 초기 객체 입니다.
    * 사용하지 않으면 빈객체가 전달 된다.
    **/
-  return <Component {...pageProps} />
+  return (
+      <div>
+        <Header/>
+        <Component {...pageProps} />
+        <Footer/>
+      </div>
+      )
 }
 export default MyApp
 
