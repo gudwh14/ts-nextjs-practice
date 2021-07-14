@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
+import "semantic-ui-css/semantic.min.css"
 
 function MyApp({ Component, pageProps }: AppProps) {
   /**
@@ -10,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
    * 사용하지 않으면 빈객체가 전달 된다.
    **/
   return (
-      <div>
+      <div style={{width : 1000, margin : "0 auto"}}>
         <Header/>
         <Component {...pageProps} />
         <Footer/>
