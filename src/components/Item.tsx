@@ -1,5 +1,5 @@
 import {ListData} from "../../pages";
-import {Button, Divider} from "semantic-ui-react";
+import {Button, Divider, Image} from "semantic-ui-react";
 
 type ItemProps = {
     item : ListData | null;
@@ -9,7 +9,7 @@ const ItemData = ({item} : ItemProps) => {
     return (
         <>
             <div>
-                <img src={item?.image_link} alt={item?.name}/>
+                <Image src={item?.image_link} alt={item?.name}/>
                 <h1>{item?.name}</h1>
                 <strong>${item?.price}</strong>
             </div>

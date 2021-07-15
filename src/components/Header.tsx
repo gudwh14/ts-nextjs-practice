@@ -1,4 +1,5 @@
 import Gnb from "./Gnb";
+import Image from 'next/image';
 
 const Header = () => {
     return (
@@ -8,7 +9,7 @@ const Header = () => {
                 public 폴더를 여러개 할경우 에러가 발생함. public 폴더 이름 변경 불가
             **/}
             <div style={{display : 'flex'}}>
-                <img src="/images/jjo_ico.jpeg" alt="아이콘" width={80} height={80}/>
+                <Image src="/images/jjo_ico.jpeg" alt="아이콘" width={80} height={80}/>
                 <h1>JJo</h1>
             </div>
             <Gnb/>

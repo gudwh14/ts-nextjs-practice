@@ -1,5 +1,7 @@
 import {ListData} from "../../pages";
 import Link from "next/link";
+import {Image} from "semantic-ui-react";
+
 
 type ItemListProps = {
     list : ListData[];
@@ -11,7 +13,7 @@ const ItemList = ({list} : ItemListProps) : JSX.Element => {
             <div key={data.id} className="column">
                 <Link href={`/item/${data.id}`} >
                     <a style={{display : "flex", flexDirection: "column", justifyContent : "center",alignItems: "center"}}>
-                        <img src={data.image_link} alt={data.name}/>
+                        <Image src={data.image_link} alt={data.name}/>
                         <strong>{data.name}</strong>
                         <p style={{color : "gray"}}>{data.category} {data.product_type}</p>
                         <strong style={{color : "Blue"}}>${data.price}</strong>

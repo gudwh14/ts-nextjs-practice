@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Image, {ImageLoader} from 'next/image'
 import styles from '../styles/Home.module.css'
 import axios from "axios";
 import {useEffect, useState} from "react";
