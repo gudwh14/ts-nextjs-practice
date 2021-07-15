@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import axios from "axios";
 import {useEffect, useState} from "react";
 import ItemList from "../src/components/ItemList";
+import {string} from "prop-types";
 
 export type ListData =  {
     api_featured_image: string;
@@ -28,14 +29,14 @@ export type ListData =  {
 }
 
 export default function Home() {
-    const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+    // 환경변수 사용하기
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const [data, setData] = useState<ListData[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const getData = async () => {
-        await axios.get(API_URL)
+        await axios.get(API_URL ? API_URL : "")
             .then((response)=> {
-                console.log(response.data);
                 setData(response.data);
                 setIsLoading(false);
             })
