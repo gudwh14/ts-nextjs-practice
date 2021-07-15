@@ -16,7 +16,6 @@ const ItemPage = ({item,name} : ServerSideProps) => {
     // const router = useRouter();
     // // 동적 라우터를 통해 들어온 /item/:id 값을 가져올 수 있다.
     // const { id } = router.query;
-
     return (
         <>
             <Head>

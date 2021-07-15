@@ -5,6 +5,8 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import ItemList from "../src/components/ItemList";
 import {string} from "prop-types";
+import {GetStaticProps, NextPage} from "next";
+import exp from "constants";
 
 export type ListData =  {
     api_featured_image: string;
@@ -28,40 +30,34 @@ export type ListData =  {
     website_link: string
 }
 
-export default function Home() {
-    // 환경변수 사용하기
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const [data, setData] = useState<ListData[] | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+type StaticProps = {
+    data : ListData[];
+}
 
-    const getData = async () => {
-        await axios.get(API_URL ? API_URL : "")
-            .then((response)=> {
-                setData(response.data);
-                setIsLoading(false);
-            })
-    }
-
-    useEffect(()=> {
-        getData();
-    },[])
+const Home : NextPage<StaticProps>= ({data}) => {
 
     return (
         <div style={{marginTop : 14}}>
             <Head>
                 <title>HOME | JJo</title>
             </Head>
-            { isLoading &&
-                <div className="ui segment" style={{display : "inline-block", height : "300px", width : "100%"}}>
-                    <div className="ui active inverted dimmer">
-                        <div className="ui text loader">Loading</div>
-                    </div>
-                    <p></p>
-                </div>
-            }
             { data && <ItemList list={data}/> }
         </div>
     )
+}
+
+export default Home;
+
+export const getStaticProps : GetStaticProps<StaticProps> = async () => {
+    const API_URL = process.env.apiUrl;
+    const response = await axios.get(API_URL ? API_URL : "");
+    const data = response.data;
+
+    return {
+        props : {
+            data : data
+        }
+    }
 }
 
 /*

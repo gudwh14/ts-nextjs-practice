@@ -11,7 +11,7 @@ const ItemList = ({list} : ItemListProps) : JSX.Element => {
     const renderItemList = list.map((data)=> {
         return (
             <div key={data.id} className="column">
-                <Link href={`/item/${data.id}`} >
+                <Link href={`/detail/${data.id}`}>
                     <a style={{display : "flex", flexDirection: "column", justifyContent : "center",alignItems: "center"}}>
                         <Image src={data.image_link} alt={data.name}/>
                         <strong>{data.name}</strong>
