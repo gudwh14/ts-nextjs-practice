@@ -9,6 +9,7 @@ import {
     GetStaticProps, NextPage
 } from "next";
 import Head from "next/head";
+import {useRouter} from "next/router";
 
 /**
     다이나믹 라우터 + 정적 생성 사용시 주의사항
@@ -23,10 +24,24 @@ interface StaticProps {
 }
 
 const ItemPage : NextPage<StaticProps>= ({item, name}) => {
-    // // useRouter 사용하기
-    // const router = useRouter();
+    // useRouter 사용하기
+    const router = useRouter();
     // // 동적 라우터를 통해 들어온 /item/:id 값을 가져올 수 있다.
     // const { id } = router.query;
+
+    // fallback 을 통해서 처음 들어오면 isFallback : true
+    // 그후 false 로 바뀜
+    if(router.isFallback) {
+        return (
+            <div className="ui segment">
+                <div className="ui active inverted dimmer">
+                    <div className="ui text loader">Loading</div>
+                </div>
+                <p></p>
+            </div>
+        )
+    }
+
     return (
         <>
             <Head>
@@ -40,13 +55,20 @@ const ItemPage : NextPage<StaticProps>= ({item, name}) => {
 }
 export default ItemPage;
 
-export const getStaticPaths : GetStaticPaths = () => {
+export const getStaticPaths : GetStaticPaths = async () => {
+    const API_URL = process.env.apiUrl;
+    const response = await axios.get(API_URL ? API_URL : "");
+    const data = response.data;
+
     return {
-        paths: [
-            {params : {id : '740'}},
-            {params : {id : '730'}},
-            {params : {id : '729'}},
-        ],
+        // paths: [
+        //     {params : {id : '740'}},
+        //     {params : {id : '730'}},
+        //     {params : {id : '729'}},
+        // ],
+        paths : data.slice(0,9).map((item : ListData)=>({
+            params : {id : item.id.toString()}
+        })),
         // false 이면 페이지 대응을 하지 않음
         fallback : true
     }
