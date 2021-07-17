@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import "semantic-ui-css/semantic.min.css"
+import {wrapper} from "../src/store/modules";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /**
@@ -12,13 +13,14 @@ function MyApp({ Component, pageProps }: AppProps) {
    **/
   return (
       <div style={{width : 1000, margin : "0 auto"}}>
-        <Header/>
+        {/*<Header/>*/}
         <Component {...pageProps} />
         <Footer/>
       </div>
       )
 }
-export default MyApp
+// Redux 적용하기
+export default wrapper.withRedux(MyApp);
 
 /**
  모든 페이지는 _app 을 통합니다.
