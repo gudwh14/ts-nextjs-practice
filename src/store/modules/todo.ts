@@ -1,33 +1,34 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+let nextId = 1;
 
-type Todo = {
+export type Todo = {
     id : number;
     title : string;
     done : boolean;
 }
 
-let nextId = 1;
+export type TodoState = Todo[];
 
-const initialState : Todo[] = [];
+const initialState : TodoState = [];
 
 export const todoSlice = createSlice({
     name : 'todo',
     initialState : initialState,
     reducers : {
-        addAction(state : Todo[], action : PayloadAction<string>) {
-            state.concat({
+        addAction(state : TodoState, action : PayloadAction<string>) {
+            state.push({
                 id : nextId++,
                 title : action.payload,
                 done : false
             });
         },
-        removeAction(state : Todo[], action : PayloadAction<number>) {
-            state.filter((todo)=> {
-                return todo.id !== action.payload
-            })
+        removeAction(state : TodoState, action : PayloadAction<number>) {
+            return state.filter((todo)=> todo.id !== action.payload);
         },
-        toggleAction(state : Todo[], action : PayloadAction<number>) {
-            state.map((todo)=> todo.id === action.payload ? {...todo, done : true} : todo)
+        toggleAction(state : TodoState, action : PayloadAction<number>) {
+            return state.map((todo)=> {
+                return todo.id === action.payload ? {...todo, done : true} : todo
+            })
         }
     }
 })
