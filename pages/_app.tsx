@@ -4,6 +4,9 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import "semantic-ui-css/semantic.min.css"
 import {wrapper} from "../src/store/modules";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {Hydrate} from "react-query/hydration";
+import {ReactQueryDevtoolsPanel} from "react-query/devtools";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /**
@@ -11,12 +14,20 @@ function MyApp({ Component, pageProps }: AppProps) {
    * pageProps 는 DataFetching 메소드를 통해 미리 가져온 초기 객체 입니다.
    * 사용하지 않으면 빈객체가 전달 된다.
    **/
+
+  const queryClient = new QueryClient();
+
   return (
-      <div style={{width : 1000, margin : "0 auto"}}>
-        {/*<Header/>*/}
-        <Component {...pageProps} />
-        <Footer/>
-      </div>
+      <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydrateState}>
+              <div style={{width: 1000, margin: "0 auto"}}>
+                  {/*<Header/>*/}
+                  <Component {...pageProps} />
+                  <Footer/>
+              </div>
+          </Hydrate>
+          <ReactQueryDevtoolsPanel/>
+      </QueryClientProvider>
       )
 }
 // Redux 적용하기

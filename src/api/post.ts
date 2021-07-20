@@ -9,7 +9,7 @@ export interface PostType {
 
 const API_URL = "https://jsonplaceholder.typicode.com/posts"
 
-export const getPosts = async () => {
-    const response = await axios.get<PostType>(API_URL);
+export const getPosts = async () : Promise<PostType[]>=> {
+    const response = await axios.get<PostType[]>(API_URL);
     return response.data;
 }
