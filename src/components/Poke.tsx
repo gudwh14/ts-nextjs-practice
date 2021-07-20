@@ -1,9 +1,11 @@
 import {getPokemon, PokeType, usePokemon} from "../api/poke";
 import {useInfiniteQuery} from "react-query";
+import {useRef} from "react";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 const Poke = () => {
 
-     const {data, fetchNextPage} = useInfiniteQuery('pokemon',({pageParam = ''})=>getPokemon(pageParam),{
+     const {data, fetchNextPage,hasNextPage} = useInfiniteQuery('pokemon',({pageParam = ''})=>getPokemon(pageParam),{
          getNextPageParam  : (lastPage) => {
              // lastPage : 마지막 페이지의 data 를 가지고있다.
              // 마지막 페이지의 마지막 data 의 url 에서 offset 을 가져와서 다음 페이지를 부를때 사용하게 된다.
@@ -24,6 +26,14 @@ const Poke = () => {
      옵션으로는 getNextPageParam, getPreviousPageParam 옵션을 사용 할 수 있습니다.
      각각의 옵션은 fetchNextPage, fetchPreviousPage 함수가 실행될때 Query Function 에 추가적인 파라미터를 제공합니다.
      */
+    const targetRef = useRef(null);
+    useIntersectionObserver({
+        root : null,
+        target : targetRef,
+        onIntersect : fetchNextPage,
+        enable : hasNextPage,
+        threshold : 0
+    })
 
     return(
       <>
@@ -37,6 +47,7 @@ const Poke = () => {
               ))}
           </ul>
           <button onClick={()=>fetchNextPage()}>Load More</button>
+          <div ref={targetRef}></div>
       </>
     );
 }

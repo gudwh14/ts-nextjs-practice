@@ -27,3 +27,8 @@ export const getPokemon = async (offset : number = 0) => {
 export const usePokemon = (offset : number = 0) => {
    return useInfiniteQuery('pokemon', ()=>getPokemon(offset))
 }
+
+export const getAllPokemon = async () => {
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=880");
+    return response.data;
+}

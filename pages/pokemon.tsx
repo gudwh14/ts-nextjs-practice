@@ -1,7 +1,7 @@
-import {GetStaticProps} from "next";
+import {GetServerSideProps, GetStaticProps} from "next";
 import {QueryClient} from "react-query";
 import {dehydrate} from "react-query/hydration";
-import {getPokemon} from "../src/api/poke";
+import {getAllPokemon, getPokemon} from "../src/api/poke";
 import Poke from "../src/components/Poke";
 
 const Pokemon = () => {
@@ -18,7 +18,7 @@ const Pokemon = () => {
     initial Data 를 이용하면 간단하나 , 여러 컴포넌트에서 해당 데이터를 SSR 를 통해 보여주려고 한다면
     모든 컴포넌트에 initial Data 를 넘겨줘야 한다
  */
-export const getStaticProps : GetStaticProps = async () => {
+export const getServerSideProps : GetServerSideProps = async () => {
     const queryClient = new QueryClient();
     await queryClient.prefetchInfiniteQuery('pokemon', ()=>getPokemon(),{
         staleTime : 1000 * 10// 10초
