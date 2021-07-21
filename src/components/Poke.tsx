@@ -1,6 +1,6 @@
 import {getPokemon, PokeType, usePokemon} from "../api/poke";
 import {useInfiniteQuery} from "react-query";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 const Poke = () => {
@@ -16,7 +16,7 @@ const Poke = () => {
              }
              return lastOffset
          },
-         staleTime : 1000,
+         staleTime : 1000 * 10,
      });
     /**
      InfiniteQuery 를 사용하면 data 에 pages, pageParams 객채를 가지고 있다.
@@ -34,6 +34,10 @@ const Poke = () => {
         enable : hasNextPage,
         threshold : 0
     })
+
+    useEffect(()=> {
+        console.log("hasNextPage", hasNextPage);
+    },[hasNextPage]);
 
     return(
       <>
