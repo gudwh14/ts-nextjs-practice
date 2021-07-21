@@ -1,25 +1,25 @@
-const testFn = require("./fn");
-// @ts-ignore
+const fn = require('./fn');
+
 test('2+3은 5이다',()=>{
-    expect(testFn.addNumber(2,3)).toBe(5);
+    expect(fn.addNumber(2,3)).toBe(5);
 })
 
 test('10+2은 10이 아니다',()=>{
-    expect(testFn.addNumber(10,2)).not.toBe(10);
+    expect(fn.addNumber(10,2)).not.toBe(10);
 })
 
 test('2+3은 5이다',()=>{
-    expect(testFn.addNumber(2,3)).toEqual(5);
+    expect(fn.addNumber(2,3)).toEqual(5);
 })
 
 // 객채,배열은 toEqual 를 이용해서 비교해야 한다.
 test('이름과 나이를 전달받아서 객채로 반환해주기', ()=>{
-    expect(testFn.makeUser("jjo",25)).toEqual({name : "jjo", "age" : 25})
+    expect(fn.makeUser("jjo",25)).toEqual({name : "jjo", "age" : 25})
 })
 
 // 깊은 비교를 위해서는 toStrictEqual 를 사용해야 한다.
 // test('이름과 나이를 전달받아서 객채로 반환해주기', ()=>{
-//     expect(testFn.makeUser("jjo",25)).toStrictEqual({name : "jjo", "age" : 25})
+//     expect(fn.makeUser("jjo",25)).toStrictEqual({name : "jjo", "age" : 25})
 // })
 
 // toBeNull
@@ -47,7 +47,7 @@ test("ID는 10자 아하여야 합니다.", ()=> {
 
 // 소수점 계산은 근사치로 판단
 test("0.1 더하기 0.2 는 0.3 입니다",()=>{
-    expect(testFn.addNumber(0.1,0.2)).toBeCloseTo(0.3)
+    expect(fn.addNumber(0.1,0.2)).toBeCloseTo(0.3)
 })
 
 // 정규표현식을 사용해서 문자열 찾기
@@ -61,5 +61,5 @@ test("유저리스트에 jjo 가 있나?",()=> {
 })
 
 test("에러 발생?", ()=> {
-    expect(()=>testFn.throwErr()).toThrow();
+    expect(()=>fn.throwErr()).toThrow();
 })

@@ -10,7 +10,7 @@ module.exports = {
     setupFilesAfterEnv: ['./jest.setup.js'],
     preset: "ts-jest",
     transform: {
-        "^.+\\.ts$": "ts-jest"
+        "^.+\\.ts": "ts-jest"
     },
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
     globals: {
