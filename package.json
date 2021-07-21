@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",

@@ -8,6 +8,7 @@
 module.exports = {
     testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
     setupFilesAfterEnv: ['./jest.setup.js'],
+    verbose : true,
     preset: "ts-jest",
     transform: {
         "^.+\\.ts": "ts-jest"
