@@ -6,7 +6,43 @@
 const fn = {
     addNumber: (num1, num2) => num1 + num2,
     makeUser : (name, age) => ({name,age, gender : undefined}),
-    throwErr : () => {throw new Error('Error 발생')}
+    throwErr : () => {throw new Error('Error 발생')},
+    connectUserDb : () => {
+        return new Promise(resolve => {
+            setTimeout(()=> {
+                resolve({
+                    name : "Mike",
+                    age : 25,
+                    gender : 'male'
+                });
+            },500)
+        });
+    },
+    disconnectDb : () => {
+        return new Promise(resolve => {
+            setTimeout(()=> {
+                resolve();
+            },500);
+        });
+    },
+    connectCarDb : () => {
+        return new Promise(resolve => {
+            setTimeout(()=> {
+                resolve({
+                    brand : "bmw",
+                    name : 'x5',
+                    color : 'blue'
+                });
+            },500)
+        });
+    },
+    disconnectCarDb : () => {
+        return new Promise(resolve => {
+            setTimeout(()=> {
+                resolve();
+            },500);
+        });
+    },
 }
 
 module .exports = fn;
